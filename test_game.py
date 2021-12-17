@@ -4,7 +4,8 @@ import random
 import pygame.mouse
 import pytest
 from pygame import mouse
-from main import fcnmath, tow_ok, field_choose, field1, field2, field3, death_check, enemy
+from main import fcnmath, tow_ok, towers
+
 
 def test_fcnmath():
     x1, x2, y1, y2 = 0, 1, 0, 1
@@ -58,14 +59,19 @@ def test_fcnmath_12():
     "Should be 0.9230769230769231, 0.38461538461538464, 13, 0.3947911196997615"
 
 
-'''def test_field_choose():
-    x1 = field1
-    y1 = field2
-    z1 = field3
-    map = [x1, y1, z1]
-    p = random.choice(map)
-    x = field_choose()
-    assert p == x
+x = 15
+y = 45
+
+
+def test_tow_ok1(x, y):
+    x += 30 / 2
+    y += 30 / 2
+    for t in towers:
+        if t.x == x and t.y == y:
+            b = False
+    a = tow_ok(x, y)
+    assert a == b
+
 
 
 mp = pygame.mouse.get_pos()
@@ -81,4 +87,4 @@ def test_tow_ok(x, y):
 
 def test_tow_ok():
     x, y = 15, 45
-    assert tow_ok(x, y) == True'''
+    assert tow_ok(x, y) == True

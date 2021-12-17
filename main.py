@@ -1,3 +1,7 @@
+"""импортируем библиотеки:
+pygame - для помощи в создании графики, управлении мышкой и клавиатурой
+math - для рассчетов
+random - для получения случайных значений"""
 import pygame
 import math
 import random
@@ -10,10 +14,11 @@ win_sx = 20  # количество квадратов по икс
 win_sy = 20  # по игрек
 side_s = 30  # сторона
 
-width = win_sx * side_s + 1
-height = win_sy * side_s + 1
-fps = 30
+width = win_sx * side_s + 1  # ширина окна
+height = win_sy * side_s + 1  # его высота
+fps = 30  # кадровая частота
 
+# цвета
 red = (255, 0, 0)
 dark_red = (155, 0, 0)
 green = (0, 255, 0)
@@ -24,12 +29,11 @@ black = (0, 0, 0)
 white = (255, 255, 255)
 yellow = (255, 255, 0)
 
-pygame.init()
+pygame.init()  # активизация библиотеки пайгейм
 
-win = pygame.display.set_mode((width, height))
+win = pygame.display.set_mode((width, height))  # создаем окно с заданными парамаетрами, где будет игра
 pygame.display.set_caption("Tower defence")  # подпись
-clock = pygame.time.Clock()
-
+clock = pygame.time.Clock()  #
 
 """функция отрисовки карты чтобы разделить ее на 
     равные клетки"""
@@ -110,10 +114,11 @@ class enemy:
         self.fast = fast
         self.dot = 0
 
-
     def draw(self):
         pygame.draw.circle(win, self.color, [self.x, self.y], self.size)
+
     """создадим метод для движения по дотам"""
+
     def go_en(self):
         go = fcnmath(self.x, check[self.dot][0], self.y, check[self.dot][1])
         self.x += self.fast * go[0]
@@ -132,7 +137,7 @@ def put_e(size, color, heal, fast):
     for i in range(10):
         enem.append(enemy(i * side_s + side_s / 2, 6 * side_s + side_s / 2, 15, red, 10, 10))"""
     for i in range(random.randint(10, 30)):
-        x = check[0][0] - 200 - i*10 - 5
+        x = check[0][0] - 200 - i * 10 - 5
         y = check[0][1]
         enem.append(enemy(x, y, size, color, heal, fast))
 
@@ -195,7 +200,7 @@ def tow_ok(x, y):
             if tower.x == x and tower.y == y:
                 return False
     for step in road:
-        if step[0] + side_s/2 == x and step[1] + side_s/2 == y:
+        if step[0] + side_s / 2 == x and step[1] + side_s / 2 == y:
             return False
     return True
 
@@ -289,7 +294,6 @@ def field_choose():
 
 a = field_choose()
 
-
 road = []
 
 """хранит данные о клетке карты и заполняет ее"""
@@ -310,7 +314,6 @@ def put_r(col):
 """создадим функцию которая поможет врагу двигаться
 на каждом повороте будет точка к которой надо приблизиться"""
 
-
 check = []
 
 
@@ -320,7 +323,7 @@ def checkpoin(count):
         for i in range(len(a)):
             for j in range(len(a[0])):
                 if a[i][j] == dot:
-                    check.append([j * side_s + side_s/2, i * side_s + side_s/2])
+                    check.append([j * side_s + side_s / 2, i * side_s + side_s / 2])
                     dot += 1
                     """надо в углы карты написать цифры начиная с 2"""
 
@@ -345,7 +348,7 @@ def main():
         enemy.go_en()
     death_check()
     for weapon in weapons:
-        if enem: # пули стреляли, а играков не было
+        if enem:  # пули стреляли, а играков не было
             a = fcnmath(weapon.x, enem[0].x, weapon.y, enem[0].y)  # самый первый враг
             weapon.go(a[0], a[1])
             """уничтожение пули и урон врагу"""
@@ -356,12 +359,9 @@ def main():
     death_check()
 
 
-
-
 do_r()
 checkpoin(8)
 put_e(8, red, 10, 3)
-
 
 if __name__ == "__main__":
     run = True
