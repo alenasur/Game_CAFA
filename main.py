@@ -305,19 +305,38 @@ do_r()
 checkpoin(8)
 put_e(8, red, 10, 3)
 # print(check)
-run = True
-# Добавим таймер для отрисовки игры каждый 30 миллисекунд (fps)
-timer_event = pygame.USEREVENT + 1
-pygame.time.set_timer(timer_event, fps)
-# Игровой цикл
-while run:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-        elif event.type == timer_event:
-            win.fill(black)
-            #put_e()
-            main()
-            pygame.display.update()
+# run = True
+# # Добавим таймер для отрисовки игры каждый 30 миллисекунд (fps)
+# timer_event = pygame.USEREVENT + 1
+# pygame.time.set_timer(timer_event, fps)
+# # Игровой цикл
+# while run:
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             run = False
+#         elif event.type == timer_event:
+#             win.fill(black)
+#             #put_e()
+#             main()
+#             pygame.display.update()
+#
+# pygame.quit()
 
-pygame.quit()
+
+if __name__ == "__main__":
+    run = True
+    # Добавим таймер для отрисовки игры каждый 30 миллисекунд (fps)
+    timer_event = pygame.USEREVENT + 1
+    pygame.time.set_timer(timer_event, fps)
+    # Игровой цикл
+    while run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            elif event.type == timer_event:
+                win.fill(black)
+                # put_e()
+                main()
+                pygame.display.update()
+
+    pygame.quit()
